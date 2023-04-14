@@ -13,13 +13,15 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
+import com.authregservice.service.UserDetailsServiceImpl;
+
 @Configuration
 @EnableWebSecurity
 public class AuthConfig {
 	
 	@Bean
     public UserDetailsService userDetailsService(){
-        return new CustomUserDetailsService();
+        return new UserDetailsServiceImpl();
     }
 	
 	@Bean
@@ -33,7 +35,7 @@ public class AuthConfig {
 	
 	@Bean
     public AuthenticationProvider authenticationProvider(){
-        DaoAuthenticationProvider authenticationProvider=new DaoAuthenticationProvider();
+        DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
         authenticationProvider.setUserDetailsService(userDetailsService());
         authenticationProvider.setPasswordEncoder(passwordEncoder());
         return authenticationProvider;

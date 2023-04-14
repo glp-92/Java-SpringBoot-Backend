@@ -1,4 +1,4 @@
-package com.authregservice.config;
+package com.authregservice.service;
 
 import java.util.Optional;
 
@@ -12,7 +12,7 @@ import com.authregservice.data.UserRepository;
 import com.authregservice.model.pojo.User;
 
 @Service
-public class CustomUserDetailsService implements UserDetailsService {
+public class UserDetailsServiceImpl implements UserDetailsService {
 	
 	@Autowired
 	private UserRepository userRepository;
@@ -20,7 +20,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		Optional<User> user = userRepository.findByUsername(username);
-		return user.map(CustomUserDetails::new).orElseThrow(() -> new UsernameNotFoundException("user not found with name :" + username));
+		return user.map(UserDetailsImpl::new).orElseThrow(() -> new UsernameNotFoundException("user not found with name :" + username));
 	}
 
 }

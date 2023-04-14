@@ -1,9 +1,7 @@
 package com.authregservice.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.AfterDomainEventPublication;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -20,6 +18,7 @@ import com.authregservice.model.request.AuthRequest;
 import com.authregservice.model.request.CreateUserRequest;
 import com.authregservice.service.AuthService;
 
+import io.jsonwebtoken.Claims;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -55,9 +54,14 @@ public class AuthController {
 	}
 	
 	@GetMapping("/validate")
-	public String validateToken(@RequestParam("token") String token) {
-		authService.validateToken(token);
-		return "Token is valid";
+	public ResponseEntity<?> validateToken(@RequestParam("token") String token) {
+		boolean validToken = authService.validateToken(token);
+		if (validToken) {
+			return ResponseEntity.status(HttpStatus.OK).build();
+		}
+		else {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+		}
 	}
 	
 }

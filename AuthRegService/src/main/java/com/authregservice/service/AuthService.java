@@ -6,5 +6,5 @@ import com.authregservice.model.request.CreateUserRequest;
 public interface AuthService {
 	User createUser(CreateUserRequest request);
 	String generateToken(String username);
-	void validateToken(String token);
+	boolean validateToken(String token);
 }

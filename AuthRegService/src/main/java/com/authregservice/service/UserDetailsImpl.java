@@ -1,4 +1,4 @@
-package com.authregservice.config;
+package com.authregservice.service;
 
 import java.util.Collection;
 
@@ -6,13 +6,17 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.authregservice.model.pojo.User;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
-public class CustomUserDetails implements UserDetails {
+public class UserDetailsImpl implements UserDetails {
 	
+	private static final long serialVersionUID = 1L;
 	private String username;
+	
+	@JsonIgnore
     private String password;
 
-    public CustomUserDetails(User userCredential) {
+    public UserDetailsImpl(User userCredential) {
         this.username = userCredential.getUsername();
         this.password = userCredential.getPassword();
     }

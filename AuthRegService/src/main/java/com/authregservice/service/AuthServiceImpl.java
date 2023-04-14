@@ -30,7 +30,7 @@ public class AuthServiceImpl implements AuthService {
 		return jwtService.generateToken(username);
 	}
 	
-	public void validateToken(String token) {
-		jwtService.validateToken(token);
+	public boolean validateToken(String token) {
+		return jwtService.validateToken(token);
 	}
 }
