@@ -27,7 +27,7 @@ eureka.client.service-url.defaultZone=http://localhost:8761/eureka/
     | username | String |
     | email | String |
     | password | String |
-    | roles | set<Roles> |
+    | roles | set Roles |
 - `Role.java` `Rolename.java` name of roles of enumerated Rolename.
 - `AuthRequest.java` `CreateUserRequest.java` intermediate class to control variable exchange.
 - `AuthService.java` implements create user, generate token, validate token on auth.
