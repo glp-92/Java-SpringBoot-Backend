@@ -15,7 +15,7 @@ eureka.client.service-url.defaultZone=http://localhost:8761/eureka/
 ### Modules
 - `AuthConfig.java` Implements beans UserDetailsService, SecurityFilterChain, BcriptEncoder, AuthenticationProvider and AuthenticationManager
 - `AuthController.java` Endpoints for Login/register/token. Validate only for testing.
-    | Endpoint | Method | Param | Body |Response |
+    | Endpoint | Method | Param | Body | Response |
     | --- | --- | --- | --- | --- |
     | auth/register | POST | --- | {"username": "xx", "email": "xx@...", "password": "XX"} | 201, 500 |
     | auth/login | POST | --- | {"username": "xx", "password": "XX"} | JwtToken(STRING) |
@@ -23,6 +23,7 @@ eureka.client.service-url.defaultZone=http://localhost:8761/eureka/
 - `RoleRepository.java` `UserRepository.java` extends Jpa to query on Db.
 - `User.java`
     | Column | Type |
+    | --- | --- |
     | username | String |
     | email | String |
     | password | String |
