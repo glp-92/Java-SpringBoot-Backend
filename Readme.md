@@ -13,12 +13,14 @@ Microservice-based architecture that implements:
 
 ## API
 - Auth Service Endpoints
+
     | Endpoint | Method | Param | Body | Response | Functionality |
     | --- | --- | --- | --- | --- | --- |
     | /auth/register | POST | --- | {"username": "xx", "email": "xx@...", "password": "XX"} | 201, 500 | User Register |
     | /auth/login | POST | --- | {"username": "xx", "password": "XX"} | JwtToken(STRING) | User Login which retrieves token |
     | /auth/validate (test) | GET | "token": JwtToken | --- | 200, 400 | Test token validation (not for production) |
 - Store API Endpoints
+
     | Endpoint | Method | Param | Body | Response | Functionality |
     | --- | --- | --- | --- | --- | --- |
     | /cart | GET | --- | --- | 200, 500 | Get all carts |
