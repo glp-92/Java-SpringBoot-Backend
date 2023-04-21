@@ -2,8 +2,10 @@
 
 Spring Security Auth Service using Jwt Token to maintain session.
 
+
 ## Java version: 17
 ## Spring Boot: 3.0.5
+
 
 ### Eureka Discovery config (application.properties)
 ``` 
@@ -11,6 +13,7 @@ server.port=8080
 spring.application.name=AUTH-SERVER
 eureka.client.service-url.defaultZone=http://localhost:8761/eureka/
 ``` 
+
 
 ### Modules
 - `AuthConfig.java` Implements beans UserDetailsService, SecurityFilterChain, BcriptEncoder, AuthenticationProvider and AuthenticationManager
@@ -35,8 +38,8 @@ eureka.client.service-url.defaultZone=http://localhost:8761/eureka/
 - `UserDetailsImpl.java` implements Spring class that manages user attributes like username, password, email...
 - `UserDetailsServiceImpl.java` maps an input user data to userDetails if exists, using Jpa repository to find it.
 
-### Future Improvements:
 
+### Future Improvements:
 - Role implementation.
 - Logout.
 - Destroy Jwt when init service

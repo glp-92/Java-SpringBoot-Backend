@@ -2,8 +2,10 @@
 
 This microservice implements a simple store wich includes cart and products with relation 'Many to Many' with these entities by using and intermediate table CartProducts.
 
+
 ## Java version: 17
 ## Spring Boot: 3.0.5
+
 
 ### Eureka Discovery config (application.properties)
 ``` 
@@ -11,6 +13,7 @@ server.port=7000
 spring.application.name=STORE-SERVICE
 eureka.client.service-url.defaultZone=http://localhost:8761/eureka/
 ``` 
+
 
 ### Modules
 - `CartController.java` Endpoints to create/erase cart and add/erase products from cart.
@@ -42,6 +45,6 @@ eureka.client.service-url.defaultZone=http://localhost:8761/eureka/
 - `CartService.java` implements methods to create, update, delete cart and update products on cart.
 - `ProductService.java` implements methods to create, update and delete products.
 
-### Future Improvements:
 
+### Future Improvements:
 - Cart using hashset of products.
