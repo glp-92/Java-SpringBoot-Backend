@@ -12,6 +12,7 @@ Microservice-based architecture that implements:
 
 
 ## API
+By using the API Gateway URI: 'http://localhost:9000'
 - Auth Service Endpoints
     | Endpoint | Method | Param | Body | Response |
     | --- | --- | --- | --- | --- |
