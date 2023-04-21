@@ -32,13 +32,12 @@ eureka.client.service-url.defaultZone=http://localhost:8761/eureka/
     | Column | Type |
     | --- | --- |
     | products | List of Products |
-- `Product.java`
+- `Product.java` entity that includes functions to increase/decrease stock
     | Column | Type |
     | --- | --- |
     | name | String |
     | price | double |
     | stock | int |
-    Includes functions to increase/decrease stock
 - `CreateCart.java` `CreateProduct.java` intermediate class to control variable exchange.
 - `CartService.java` implements methods to create, update, delete cart and update products on cart.
 - `ProductService.java` implements methods to create, update and delete products.
