@@ -17,19 +17,19 @@ eureka.client.service-url.defaultZone=http://localhost:8761/eureka/
 
 ### Modules
 - `CartController.java` Endpoints to create/erase cart and add/erase products from cart.
-    | Endpoint | Method | Param | Body | Response | Functionality |
-    | --- | --- | --- | --- | --- | --- |
-    | /cart | GET | --- | --- | 200, 500 | Get all carts |
-    | /cart | POST | --- | {"products": []} | 201, 500 | Create a cart and optional add products |
-    | /cart/{cartId}/products/{productId} | PUT | --- | --- | 200, 500 | Add a product on existing cart |
-    | /cart/{cartId}/products/{productId} | DELETE | --- | --- | 200, 500 | Delete a product on existing cart |
-    | /cart/{cartId} | DELETE | --- | --- | 200, 500 | Delete a cart |
+    | Endpoint | Method | Param | Body | Response |
+    | --- | --- | --- | --- | --- |
+    | /cart | GET | --- | --- | 200, 500 |
+    | /cart | POST | --- | {"products": []} | 201, 500 |
+    | /cart/{cartId}/products/{productId} | PUT | --- | --- | 200, 500 |
+    | /cart/{cartId}/products/{productId} | DELETE | --- | --- | 200, 500 |
+    | /cart/{cartId} | DELETE | --- | --- | 200, 500 |
 - `ProductController.java` Endpoints to create/erase products.
-    | Endpoint | Method | Param | Body | Response | Functionality |
-    | --- | --- | --- | --- | --- | --- |
-    | /products | GET | --- | --- | 200, 500 | Get all products |
-    | /products | POST | --- | {"name": "XX", "price": 0, "stock": 0} | 201, 500 | Create a product |
-    | /products/{productId} | DELETE | --- | --- | 200, 500 | Delete a product |
+    | Endpoint | Method | Param | Body | Response |
+    | --- | --- | --- | --- | --- |
+    | /products | GET | --- | --- | 200, 500 |
+    | /products | POST | --- | {"name": "XX", "price": 0, "stock": 0} | 201, 500 |
+    | /products/{productId} | DELETE | --- | --- | 200, 500 |
 - `CartRepository.java` `ProductRepository.java` extends Jpa to query on DB.
 - `Cart.java`
     | Column | Type |
