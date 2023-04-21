@@ -45,7 +45,7 @@ eureka.client.service-url.defaultZone=http://localhost:8761/eureka/
     | Method | Checks method of the request (GET, POST...) to allow redirect |
     | Query | Query params must appear to allow redirect |
     | Cookie | Checks if some cookie is present to allow redirect |
-- Filters to manipulate the http request or response or rewrite request path. Global filters are commonly used for loggin. Here AbstractGatewayFilterFactory is used to match only some requests, and check Jwt Token validation to continue the chain.
+- Filters to manipulate the http request or response or rewrite request path. Global filters are commonly used for logging requests. Here AbstractGatewayFilterFactory is used to match only some requests, and check Jwt Token validation to continue the chain.
 
 
 ### Future Improvements:
