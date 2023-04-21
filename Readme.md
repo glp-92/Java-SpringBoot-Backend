@@ -53,14 +53,14 @@ To build a container for every service you can do the following steps:
     - ENTRYPOINT: command to run the app, every word on the array is an instruction separated by comma.
 - Create the image by running:
     ```
-    docker build -t example/discovery .
+    docker build -t discovery .
     ```
     - docker build: creates an image by using a dockerfile.
-    - -t myorg/myapp: labelling image with the name specified.
+    - -t discovery: labelling image with the name specified.
     - .: dockerfile is located in the same directory.
 - Run the image:
     ```
-    docker run -p 8761:8761 example/discovery
+    docker run -p 8761:8761 discovery
     ```
 
 ### Future Improvements:
