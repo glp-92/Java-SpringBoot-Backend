@@ -13,22 +13,22 @@ Microservice-based architecture that implements:
 
 ## API
 - Auth Service Endpoints
-    | Endpoint | Method | Param | Body | Response | Functionality |
-    | --- | --- | --- | --- | --- | --- |
-    | /auth/register | POST | --- | {"username": "xx", "email": "xx@...", "password": "XX"} | 201, 500 | User Register |
-    | /auth/login | POST | --- | {"username": "xx", "password": "XX"} | JwtToken(STRING) | User Login which retrieves token |
-    | /auth/validate (test) | GET | "token": JwtToken | --- | 200, 400 | Test token validation (not for production) |
+    | Endpoint | Method | Param | Body | Response |
+    | --- | --- | --- | --- | --- |
+    | /auth/register | POST | --- | {"username": "xx", "email": "xx@...", "password": "XX"} | 201, 500 |
+    | /auth/login | POST | --- | {"username": "xx", "password": "XX"} | JwtToken(STRING) |
+    | /auth/validate (test) | GET | "token": JwtToken | --- | 200, 400 |
 - Store API Endpoints
-    | Endpoint | Method | Param | Body | Response | Functionality |
-    | --- | --- | --- | --- | --- | --- |
-    | /cart | GET | --- | --- | 200, 500 | Get all carts |
-    | /cart | POST | --- | {"products": []} | 201, 500 | Create a cart and optional add products |
-    | /cart/{cartId}/products/{productId} | PUT | --- | --- | 200, 500 | Add a product on existing cart |
-    | /cart/{cartId}/products/{productId} | DELETE | --- | --- | 200, 500 | Delete a product on existing cart |
-    | /cart/{cartId} | DELETE | --- | --- | 200, 500 | Delete a cart |
-    | /products | GET | --- | --- | 200, 500 | Get all products |
-    | /products | POST | --- | {"name": "XX", "price": 0, "stock": 0} | 201, 500 | Create a product |
-    | /products/{productId} | DELETE | --- | --- | 200, 500 | Delete a product |
+    | Endpoint | Method | Param | Body | Response |
+    | --- | --- | --- | --- | --- |
+    | /cart | GET | --- | --- | 200, 500 |
+    | /cart | POST | --- | {"products": []} | 201, 500 |
+    | /cart/{cartId}/products/{productId} | PUT | --- | --- | 200, 500 | 
+    | /cart/{cartId}/products/{productId} | DELETE | --- | --- | 200, 500 | 
+    | /cart/{cartId} | DELETE | --- | --- | 200, 500 |
+    | /products | GET | --- | --- | 200, 500 |
+    | /products | POST | --- | {"name": "XX", "price": 0, "stock": 0} | 201, 500 |
+    | /products/{productId} | DELETE | --- | --- | 200, 500 |
 
 
 ### Future Improvements:
