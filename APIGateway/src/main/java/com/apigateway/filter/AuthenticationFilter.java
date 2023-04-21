@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.factory.AbstractGatewayFilterFactory;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.stereotype.Component;
 
 import com.apigateway.util.JwtUtil;
@@ -42,7 +44,9 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
                 	jwtUtil.validateToken(authHeader);
                 } catch (Exception e) {
                     System.out.println("invalid access...!");
-                    throw new RuntimeException("un authorized access to application");
+                    ServerHttpResponse response = exchange.getResponse();
+                    response.setStatusCode(HttpStatus.UNAUTHORIZED);
+                    return response.setComplete();
                 }
             }
             return chain.filter(exchange);
