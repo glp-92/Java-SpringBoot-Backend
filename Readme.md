@@ -43,11 +43,13 @@ To build a container for every service you can do the following steps:
 - Create a `dockerfile` and add the following lines:
     ```
     FROM eclipse-temurin:17-jdk-alpine
+    EXPOSE 8761
     VOLUME /tmp
     COPY target/discovery...jar app.jar
     ENTRYPOINT ["java","-jar","/app.jar"]
     ```
     - FROM: docker image used to build the container image. This one is based on Alpine Linux.
+    - EXPOSE: exposes port on the container, which allows external services to communicate with the app running inside the container.
     - VOLUME: creating a volume on the image on /tmp dir.
     - COPY: copy the .jar file to the container and change the name to `app.jar`.
     - ENTRYPOINT: command to run the app, every word on the array is an instruction separated by comma.
