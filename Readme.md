@@ -80,7 +80,7 @@ eureka:
       defaultZone: http://host.docker.internal:8761/eureka
 ```
 
-### Future Improvements:
+## Future Improvements:
 - All
     - Dockerize services with config params secured.
 - Auth Service
