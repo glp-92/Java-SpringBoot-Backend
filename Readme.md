@@ -79,6 +79,7 @@ eureka:
     service-url:
       defaultZone: http://host.docker.internal:8761/eureka
 ```
+Due to potential DNS resolution issues in Docker, the property `eureka.instance.preferIpAddress=true` is added to all the Eureka clients.
 
 ## Future Improvements:
 - All
