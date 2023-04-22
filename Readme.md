@@ -65,21 +65,24 @@ To build a container for every service you can do the following steps:
     docker run -p 8761:8761 discovery
     ```
 ### Troubleshooting
-When running on docker, localhost is not used internally between containers, so `application.yaml` or `application.properties` must be modified from:
+When running on docker, localhost is not used internally between containers, so `application.yaml` or `application.properties` must be modified. Besides, due to potential DNS resolution issues in Docker, the property `eureka.instance.preferIpAddress=true` is added to all the Eureka clients.
+From:
+
 ```
 eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka/
 ```
-to 
+to:
 ```
 eureka:
+  instance:
+    preferIpAddress: true
   client:
     service-url:
       defaultZone: http://host.docker.internal:8761/eureka
 ```
-Due to potential DNS resolution issues in Docker, the property `eureka.instance.preferIpAddress=true` is added to all the Eureka clients.
 
 ## Future Improvements:
 - All
