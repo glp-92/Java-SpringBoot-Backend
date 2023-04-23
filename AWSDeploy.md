@@ -2,7 +2,7 @@
 
 EC2 instance will be used to deploy these services. Amazon ECS and Amazon RDS seems a better way to scale microservices architectures but that will be part of future improvements.
 
-## Step by step Deploy
+## Step by step Deployment
 1. Register on Docker Hub:
     To host docker images, register on [Docker Hub](https://hub.docker.com/)
     Login into the account with bash with credentials:
