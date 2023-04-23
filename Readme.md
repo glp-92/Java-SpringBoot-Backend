@@ -92,6 +92,9 @@ eureka:
       defaultZone: http://host.docker.internal:8761/eureka
 ```
 
+## AWS Deploy
+[Doc to deploy containers on EC2 instance](AWSDeploy.md)
+
 ## Future Improvements:
 - All
     - Dockerize services with config params secured.
