@@ -4,7 +4,7 @@ Microservice-based architecture that implements:
 - Auth Microservice which retrieves Jwt Token to access the other services.
 - API Gateway to filter and redirect requests.
 - Service Discovery with Eureka to hide IP on requests between microservices, using only Gateway URI.
-- Simple Store Service to tests the endpoints, auth and redirect.
+- Simple Store Service to test the endpoints, auth and redirect.
 
 
 ## Java version: 17
@@ -64,6 +64,8 @@ To build a container for every service you can do the following steps:
     ```
     docker run -p 8761:8761 discovery
     ```
+### Docker Compose
+By running `docker-compose up` on main directory, all services will begin with only one command if every service has the `.jar` created.
 ### Troubleshooting
 When running on docker, localhost is not used internally between containers, so `application.yaml` or `application.properties` must be modified. Besides, due to potential DNS resolution issues in Docker, the property `eureka.instance.preferIpAddress=true` is added to all the Eureka clients.
 
