@@ -6,6 +6,7 @@ services:
     build: ./DiscoveryServer
     ports:
       - "8761:8761"
+    image: guill392/discovery-service:latest
   api-gateway:
     container_name: api-gateway
     build: ./APIGateway
@@ -13,13 +14,16 @@ services:
       - "9000:9000"
     depends_on:
       - discovery-service
+    image: guill392/api-gateway:latest
   auth-service:
     container_name: auth-service
     build: ./AuthRegService
     depends_on:
       - api-gateway
+    image: guill392/auth-service:latest
   store-service:
     container_name: store-service
     build: ./Store
     depends_on:
       - auth-service
+    image: guill392/store-service:latest
