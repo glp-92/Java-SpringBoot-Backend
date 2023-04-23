@@ -15,7 +15,7 @@ EC2 instance will be used to deploy these services. Amazon ECS and Amazon RDS se
     docker-compose push
     ```
     Ensure they are uploaded by visit: https://hub.docker.com/repositories/username
-3. Create a `Security Group` to determine which ports will be opened and how all computers must interact between them:
+3. On AWS, create a `Security Group` to determine which ports will be opened and how all computers must interact between them:
     - EC2 Control Panel => Network & Security => Security Groups => Create Security Group
         - Name: Spring Microservices
         - Input Rules:
