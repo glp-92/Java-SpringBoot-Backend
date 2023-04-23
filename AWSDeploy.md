@@ -21,7 +21,7 @@ EC2 instance will be used to deploy these services. Amazon ECS and Amazon RDS se
         - Input Rules:
             - TCP, port 9000 (API Gateway), origin anywhere (0.0.0.0/0) (or whitelisted ip for use in production)
             - TCP, port 8761 (Eureka, not for production), origin anywhere (0.0.0.0/0) (or enterprise IP to monitor microservices state)
-            - SSH, port 22, origin own IP or enterprise so no-one can access the group instances.
+            - SSH, port 22, origin own IP or enterprise so no-one outside can access the group instances.
 3. Create an EC2 instance on AWS (needed user account, or academy)
     - Launch EC2 instance.
         - Name: SpringBoot Microservices.
