@@ -65,7 +65,14 @@ To build a container for every service you can do the following steps:
     docker run -p 8761:8761 discovery
     ```
 ### Docker Compose
-By running `docker-compose up` on main directory, all services will begin with only one command if every service has the `.jar` created.
+`docker-compose.yml` allows to wake all the services with only one command, in this moment, is neccesary to have the `.jar` file created. To do this run:
+```
+docker-compose up
+```
+To spot and remove containers, networks, volumes and images, run:
+```
+docker-compose down
+```
 ### Troubleshooting
 When running on docker, localhost is not used internally between containers, so `application.yaml` or `application.properties` must be modified. Besides, due to potential DNS resolution issues in Docker, the property `eureka.instance.preferIpAddress=true` is added to all the Eureka clients.
 
