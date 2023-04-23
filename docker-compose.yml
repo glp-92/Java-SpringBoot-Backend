@@ -1,0 +1,25 @@
+#docker-compose up
+#docker-compose down
+services:
+  discovery-service:
+    container_name: discovery-service
+    build: ./DiscoveryServer
+    ports:
+      - "8761:8761"
+  api-gateway:
+    container_name: api-gateway
+    build: ./APIGateway
+    ports:
+      - "9000:9000"
+    depends_on:
+      - discovery-service
+  auth-service:
+    container_name: auth-service
+    build: ./AuthRegService
+    depends_on:
+      - api-gateway
+  store-service:
+    container_name: store-service
+    build: ./Store
+    depends_on:
+      - auth-service
