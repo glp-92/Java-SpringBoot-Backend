@@ -94,7 +94,7 @@ docker-compose down
     environment:
         - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://host.docker.internal:8761/eureka
     ```
-- Besides, due to potential DNS resolution issues in Docker, the property `eureka.instance.preferIpAddress=true` is added to all the Eureka clients on `application.properties`.
+- Besides, due to potential DNS resolution issues in Docker, the property `eureka.instance.preferIpAddress=true` is added to all the Eureka clients on `application.properties` or `application.yaml`.
     ```
     eureka:
         instance:
