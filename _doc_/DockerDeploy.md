@@ -37,41 +37,41 @@ Due to portability, scalability and consistency is useful to use containers. The
 `docker-compose.yml` allows to wake all the services with only one command. It is neccesary to have the `.jar` file created for every service. 
 ```
 services:
-  discovery-service:
+    discovery-service:
     container_name: discovery-service
     image: guill392/discovery-service:latest
     build: ./DiscoveryServer
     ports:
-      - "8761:8761"
-  api-gateway:
+        - "8761:8761"
+    api-gateway:
     container_name: api-gateway
     image: guill392/api-gateway:latest
     build: ./APIGateway
     depends_on:
-      - discovery-service
+        - discovery-service
     ports:
-      - "9000:9000"
+        - "9000:9000"
     environment:
-      - SPRING_APPLICATION_NAME=API-GATEWAY
-      - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://localhost:8761/eureka
-  auth-service:
+        - SPRING_APPLICATION_NAME=API-GATEWAY
+        - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://localhost:8761/eureka
+    auth-service:
     container_name: auth-service
     image: guill392/auth-service:latest
     build: ./AuthRegService
     depends_on:
-      - api-gateway
+        - api-gateway
     environment:
-      - SPRING_APPLICATION_NAME=AUTH-SERVER
-      - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://localhost:8761/eureka
-  store-service:
+        - SPRING_APPLICATION_NAME=AUTH-SERVER
+        - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://localhost:8761/eureka
+    store-service:
     container_name: store-service
     image: guill392/store-service:latest
     build: ./Store
     depends_on:
-      - auth-service
+        - auth-service
     environment:
-      - SPRING_APPLICATION_NAME=STORE-SERVICE
-      - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://localhost:8761/eureka
+        - SPRING_APPLICATION_NAME=STORE-SERVICE
+        - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://localhost:8761/eureka
 ```
 - services: each container (service) to build is placed into this field.
 - container-name: name assigned to service.
