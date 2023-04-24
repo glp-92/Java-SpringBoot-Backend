@@ -37,38 +37,48 @@ Due to portability, scalability and consistency is useful to use containers. The
 `docker-compose.yml` allows to wake all the services with only one command. It is neccesary to have the `.jar` file created for every service. 
 ```
 services:
-    discovery-service:
-        container_name: discovery-service
-        build: ./DiscoveryServer
-        ports:
-            - "8761:8761"
-        image: guill392/discovery-service:latest
-    api-gateway:
-        container_name: api-gateway
-        build: ./APIGateway
-        ports:
-            - "9000:9000"
-        depends_on:
-            - discovery-service
-        image: guill392/api-gateway:latest
-    auth-service:
-        container_name: auth-service
-        build: ./AuthRegService
-        depends_on:
-            - api-gateway
-        image: guill392/auth-service:latest
-    store-service:
-        container_name: store-service
-        build: ./Store
-        depends_on:
-            - auth-service
-        image: guill392/store-service:latest
+  discovery-service:
+    container_name: discovery-service
+    image: guill392/discovery-service:latest
+    build: ./DiscoveryServer
+    ports:
+      - "8761:8761"
+  api-gateway:
+    container_name: api-gateway
+    image: guill392/api-gateway:latest
+    build: ./APIGateway
+    depends_on:
+      - discovery-service
+    ports:
+      - "9000:9000"
+    environment:
+      - SPRING_APPLICATION_NAME=API-GATEWAY
+      - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://localhost:8761/eureka
+  auth-service:
+    container_name: auth-service
+    image: guill392/auth-service:latest
+    build: ./AuthRegService
+    depends_on:
+      - api-gateway
+    environment:
+      - SPRING_APPLICATION_NAME=AUTH-SERVER
+      - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://localhost:8761/eureka
+  store-service:
+    container_name: store-service
+    image: guill392/store-service:latest
+    build: ./Store
+    depends_on:
+      - auth-service
+    environment:
+      - SPRING_APPLICATION_NAME=STORE-SERVICE
+      - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://localhost:8761/eureka
 ```
 - services: each container (service) to build is placed into this field.
 - container-name: name assigned to service.
+- image:  name of the Docker image that will be used for this service. If the image is not found locally or on Docker Hub, the image will be built locally accordingly to `build` param.
 - build: the location of the `Dockerfile` that will be used to build the image for this service.
 - ports: ports that will be exposed by the container. In this case, API Gateway and Eureka ports are exposed to access these services from outside the virtual network.
-- image:  name of the Docker image that will be used for this service. If the image is not found locally or on Docker Hub, the image will be built locally accordingly to `build` param.
+- environment: refers to env variables, in this case, to `application.properties` or `application.yaml` config vars.
 
 Build and run all the services by running:
 ```
@@ -79,20 +89,21 @@ To stop and remove containers, networks, volumes and images, run:
 docker-compose down
 ```
 ## Troubleshooting
-When running on docker, localhost is not used internally between containers, so `application.yaml` or `application.properties` must be modified. Besides, due to potential DNS resolution issues in Docker, the property `eureka.instance.preferIpAddress=true` is added to all the Eureka clients.
-
-```
-eureka:
-  client:
-    service-url:
-      defaultZone: http://localhost:8761/eureka/
-```
-to
-```
-eureka:
-  instance:
-    preferIpAddress: true
-  client:
-    service-url:
-      defaultZone: http://host.docker.internal:8761/eureka
-```
+- When running on docker, localhost is not used internally between containers, so `docker-compose.yml` must be modified. 
+    ```
+    environment:
+        - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://host.docker.internal:8761/eureka
+    ```
+- Besides, due to potential DNS resolution issues in Docker, the property `eureka.instance.preferIpAddress=true` is added to all the Eureka clients on `application.properties`.
+    ```
+    eureka:
+    client:
+        service-url:
+        defaultZone: http://localhost:8761/eureka/
+    ```
+    to
+    ```
+    eureka:
+    instance:
+        preferIpAddress: true
+    ```
