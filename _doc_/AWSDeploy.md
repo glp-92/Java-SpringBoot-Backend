@@ -48,47 +48,47 @@ It is higly recommended instead of installing dependencies directly on the insta
 7. Specify as `image` the tag of docker-hub images. Linux doesn´t resolve DNS `host.docker.internal` so `extra_hosts` is added, telling Docker to map the hostname `host.docker.internal` to default gateway's IP host address:
     ``` 
     services:
-    discovery-service:
-        container_name: discovery-service
-        image: guill392/discovery-service:latest
-        build: ./DiscoveryServer
-        ports:
-            - "8761:8761"
-    api-gateway:
-        container_name: api-gateway
-        image: guill392/api-gateway:latest
-        build: ./APIGateway
-        depends_on:
-            - discovery-service
-        ports:
-            - "9000:9000"
-        environment:
-            - SPRING_APPLICATION_NAME=API-GATEWAY
-            - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://host.docker.internal:8761/eureka
-        extra_hosts:
-            - "host.docker.internal:host-gateway"
-    auth-service:
-        container_name: auth-service
-        image: guill392/auth-service:latest
-        build: ./AuthRegService
-        depends_on:
-            - api-gateway
-        environment:
-            - SPRING_APPLICATION_NAME=AUTH-SERVER
-            - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://host.docker.internal:8761/eureka
-        extra_hosts:
-            - "host.docker.internal:host-gateway"
-    store-service:
-        container_name: store-service
-        image: guill392/store-service:latest
-        build: ./Store
-        depends_on:
-            - auth-service
-        environment:
-            - SPRING_APPLICATION_NAME=STORE-SERVICE
-            - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://host.docker.internal:8761/eureka
-        extra_hosts:
-            - "host.docker.internal:host-gateway"
+        discovery-service:
+            container_name: discovery-service
+            image: guill392/discovery-service:latest
+            build: ./DiscoveryServer
+            ports:
+                - "8761:8761"
+        api-gateway:
+            container_name: api-gateway
+            image: guill392/api-gateway:latest
+            build: ./APIGateway
+            depends_on:
+                - discovery-service
+            ports:
+                - "9000:9000"
+            environment:
+                - SPRING_APPLICATION_NAME=API-GATEWAY
+                - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://host.docker.internal:8761/eureka
+            extra_hosts:
+                - "host.docker.internal:host-gateway"
+        auth-service:
+            container_name: auth-service
+            image: guill392/auth-service:latest
+            build: ./AuthRegService
+            depends_on:
+                - api-gateway
+            environment:
+                - SPRING_APPLICATION_NAME=AUTH-SERVER
+                - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://host.docker.internal:8761/eureka
+            extra_hosts:
+                - "host.docker.internal:host-gateway"
+        store-service:
+            container_name: store-service
+            image: guill392/store-service:latest
+            build: ./Store
+            depends_on:
+                - auth-service
+            environment:
+                - SPRING_APPLICATION_NAME=STORE-SERVICE
+                - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://host.docker.internal:8761/eureka
+            extra_hosts:
+                - "host.docker.internal:host-gateway"
     ```
 8. Pull images from docker-hub and run containers:
     ```
