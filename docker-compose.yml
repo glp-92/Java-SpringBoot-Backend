@@ -3,27 +3,36 @@
 services:
   discovery-service:
     container_name: discovery-service
+    image: guill392/discovery-service:latest
     build: ./DiscoveryServer
     ports:
       - "8761:8761"
-    image: guill392/discovery-service:latest
   api-gateway:
     container_name: api-gateway
+    image: guill392/api-gateway:latest
     build: ./APIGateway
-    ports:
-      - "9000:9000"
     depends_on:
       - discovery-service
-    image: guill392/api-gateway:latest
+    ports:
+      - "9000:9000"
+    environment:
+      - SPRING_APPLICATION_NAME=API-GATEWAY
+      - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://host.docker.internal:8761/eureka
   auth-service:
     container_name: auth-service
+    image: guill392/auth-service:latest
     build: ./AuthRegService
     depends_on:
       - api-gateway
-    image: guill392/auth-service:latest
+    environment:
+      - SPRING_APPLICATION_NAME=AUTH-SERVER
+      - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://host.docker.internal:8761/eureka
   store-service:
     container_name: store-service
+    image: guill392/store-service:latest
     build: ./Store
     depends_on:
       - auth-service
-    image: guill392/store-service:latest
+    environment:
+      - SPRING_APPLICATION_NAME=STORE-SERVICE
+      - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://host.docker.internal:8761/eureka
