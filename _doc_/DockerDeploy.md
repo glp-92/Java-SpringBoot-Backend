@@ -97,13 +97,13 @@ docker-compose down
 - Besides, due to potential DNS resolution issues in Docker, the property `eureka.instance.preferIpAddress=true` is added to all the Eureka clients on `application.properties`.
     ```
     eureka:
-    client:
-        service-url:
-        defaultZone: http://localhost:8761/eureka/
+        client:
+            service-url:
+            defaultZone: http://localhost:8761/eureka/
     ```
     to
     ```
     eureka:
-    instance:
-        preferIpAddress: true
+        instance:
+            preferIpAddress: true
     ```
