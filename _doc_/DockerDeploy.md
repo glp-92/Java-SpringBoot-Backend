@@ -34,7 +34,7 @@ Due to portability, scalability and consistency is useful to use containers. The
     docker run -p 8761:8761 discovery
     ```
 ## Docker Compose
-`docker-compose.yml` allows to wake all the services with only one command. It is neccesary to have the `.jar` file created for everyone. 
+`docker-compose.yml` allows to wake all the services with only one command. It is neccesary to have the `.jar` file created for every service. 
 ```
 services:
     discovery-service:
@@ -67,7 +67,7 @@ services:
 - services: each container (service) to build is placed into this field.
 - container-name: name assigned to service.
 - build: the location of the `Dockerfile` that will be used to build the image for this service.
-- ports: ports that will be exposed by the container. API Gateway and Eureka ports to access these services from outside the network.
+- ports: ports that will be exposed by the container. In this case, API Gateway and Eureka ports are exposed to access these services from outside the virtual network.
 - image:  name of the Docker image that will be used for this service. If the image is not found locally or on Docker Hub, the image will be built locally accordingly to `build` param.
 
 Build and run all the services by running:
