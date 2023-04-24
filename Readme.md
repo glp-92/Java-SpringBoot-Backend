@@ -32,10 +32,10 @@ By using the API Gateway URI: `http://localhost:9000`
     | /products/{productId} | DELETE | --- | --- | 200, 500 |
 
 ## Docker
-[Doc to deploy the backend on containers](doc/DockerDeploy.md)
+[Deploy backend on containers](_doc_/DockerDeploy.md)
 
 ## AWS Deploy
-[Doc to deploy containers on EC2 instance](doc/AWSDeploy.md)
+[Deploy containers on EC2 instance](_doc_/AWSDeploy.md)
 
 ## Future Improvements:
 - All
