@@ -1,8 +1,10 @@
 # Deploy Backend to AWS EC2
 
-EC2 instance will be used to deploy these services. Amazon ECS and Amazon RDS seems a better way to scale microservices architectures but that will be part of future improvements.
+EC2 instance will be used to deploy these services. Amazon ECS and Amazon RDS seems a better way to scale microservices architectures, but that will be part of future improvements.
 
-## Step by step Deployment
+It is higly recommended instead of installing dependencies directly on the instance. To learn more about deploying a backend on Docker containers, visit [deploy Backend on Docker containers](DockerDeploy.md)
+
+## Step by step AWS EC2 Deployment
 1. Register on Docker Hub:
     To host docker images, register on [Docker Hub](https://hub.docker.com/)
     Login into the account with bash with credentials:
@@ -15,21 +17,21 @@ EC2 instance will be used to deploy these services. Amazon ECS and Amazon RDS se
     docker-compose push
     ```
     Ensure they are uploaded by visit: https://hub.docker.com/repositories/username
-3. On AWS, create a `Security Group` to determine which ports will be opened and how all computers must interact between them:
+3. On AWS, create a `Security Group` to determine which ports will be opened and how all computers will interact:
     - EC2 Control Panel => Network & Security => Security Groups => Create Security Group
         - Name: Spring Microservices
         - Input Rules:
             - TCP, port 9000 (API Gateway), origin anywhere (0.0.0.0/0) (or whitelisted ip for use in production)
             - TCP, port 8761 (Eureka, not for production), origin anywhere (0.0.0.0/0) (or enterprise IP to monitor microservices state)
             - SSH, port 22, origin own IP or enterprise so no-one outside can access the group instances.
-3. Create an EC2 instance on AWS (needed user account, or academy)
+3. Create an EC2 instance on AWS (user account or academy needed)
     - Launch EC2 instance.
         - Name: SpringBoot Microservices.
         - Amazon Linux (free tier).
         - T2 Micro instance (1GB Ram, 1 Core, free tier, might be slow)
         - Key pair: vockey.
         - Storage: 20GB.
-4. Connect to the EC2 instance by ssh or by using browser AWS pannel.
+4. Connect to the EC2 instance by using ssh or browser AWS pannel.
 5. Update and install `docker` and `docker-compose`:
     ```
     sudo yum update -y
@@ -43,7 +45,7 @@ EC2 instance will be used to deploy these services. Amazon ECS and Amazon RDS se
     ```
     nano docker-compose.yml
     ```
-7. Specify as `image` the tag of docker-hub created images. Linux doesn´t resolve the DNS `host.docker.internal` so `extra_hosts` is added to the file, so we are telling Docker to map the hostname host.docker.internal to the default gateway's IP address of the host:
+7. Specify as `image` the tag of docker-hub images. Linux doesn´t resolve DNS `host.docker.internal` so `extra_hosts` is added, telling Docker to map the hostname `host.docker.internal` to default gateway's IP host address:
     ``` 
     services:
         discovery-service:
@@ -81,7 +83,11 @@ EC2 instance will be used to deploy these services. Amazon ECS and Amazon RDS se
                 - auth-service
             image: guill392/store-service:latest
     ```
-8. Run containers, will pull images from docker-hub:
+8. Pull images from docker-hub and run containers:
     ```
     sudo docker-compose up
+    ```
+8. To stop services and delete images, network and volumes:
+    ```
+    sudo docker-compose down
     ```
