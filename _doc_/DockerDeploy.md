@@ -1,6 +1,6 @@
 # Deploy Backend to Docker Containers
 
-Due to portability, scalability and consistency is useful to use containers. There are some steps for doing this:
+Due to portability, scalability and consistency, [Docker](https://docs.docker.com/get-started/overview/) is useful to use containers . There are some steps for doing this:
 
 1. Go to a service folder (for example Discovery server): 
     ```cd DiscoveryServer```
