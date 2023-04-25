@@ -28,8 +28,27 @@ Type of scalling in Kubernetes:
         ```
         docker run --rm -it -v ${PWD}:/opt kompose sh -c "cd /opt && kompose convert"
         ```
-3. To create the Kubernetes resources specifying `yaml` files:
+3. To create and run the Kubernetes resources specifying `yaml` files:
     ```
     kubectl apply -f api-gateway-deployment.yaml,api-gateway-service.yaml,auth-service-deployment.yaml,discovery-service-deployment.yaml,discovery-service-service.yaml,opt-default-networkpolicy.yaml,store-service-deployment.yaml
     ```
     :heavy_exclamation_mark: It is important to not have spaces or additional commas between file specification.
+4. To **stop cluster** and delete associated containers, on `Docker Desktop`, go to `settings -> kubernetes -> reset kubernetes cluster`
+
+## Troubleshooting
+- Forward a service running on Kubernetes:
+    1. Get POD name `kubectl get pods' 
+    2. Forward port `kubectl port-forward podName port:port`
+- Eureka clients must modify eureka IP in order to be discovered. To make this:
+    ```
+    kubectl get pods
+    ```
+
+## Useful commands
+| Command | Usage | 
+| --- | --- |
+| `kubectl apply -f yamlFiles` | Create resources from list of `yaml` files |
+| `kubectl describe svc api-gateway` | Look for IP of a service |
+| `kubectl get nodes` | Get nodes running |
+| `kubctl get pods` | Get pods on machine |
+| `kubectl get deployments` | Get services running |
