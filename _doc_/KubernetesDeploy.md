@@ -1,22 +1,22 @@
 # Deploy Backend to Kubernetes
 
 ## Kubernetes overview
-Kubernetes is a tool that helps to manage and deploy containerized applications (such as Docker containers) across a cluster of computers. It takes care of things like load balancing, scaling, and failover.
+Kubernetes is a tool that helps to manage and deploy containerized applications (such as Docker containers) across a cluster of computers or virtualized environments. It takes care of things like load balancing, scaling, and failover.
 
-In Kubernetes, users can define the desired state of their containerized applications by using a configuration file, and Kubernetes will automatically ensure that the applications are running as expected.
+In Kubernetes, users define the desired state of their containerized applications by using a configuration file, and Kubernetes will automatically ensure that the applications are running as expected.
 
 **Main components of Kubernetes:**
 1. Pod: smallest unit, usually has one container into it (contains an app). Each POD has an internal IP address. When a POD is replaced, new IP is assigned.
 2. Service: because IP of the POD may change, service offers an static IP address and PODs can attach to it. If associated POD goes down, Service IP doesn't change.
 3. Ingress: component that forwards typically http traffic from outside the cluster to inside.
-4. ConfigMap: contain configurations of the application like db url, discovery...
+4. ConfigMap: contains configurations of the application like db url, discovery...
 5. Secret: to store credentials, keys...
-6. Volumes: to persist data on the cluster, attaches fisical store to POD, locally on cloud. Usually, data persistency is placed outside clusters.
+6. Volumes: to store persistent data on the cluster, attaches fisical store to POD, locally or cloud. Usually, data persistency is placed outside clusters.
 7. StatefulSet: sincronize read, write from PODs to database.
 
 
 **Kubernetes manages 2 types of nodes:**
-1. `Master node`: manage cluster by using these services:
+1. `Master node`: node that manages cluster by using these services:
     - `kube-scheduler` execs programmed tasks.
     - `kube-control-manager` runs the cluster
     - `kube-apiserver` communicates master with workers.
