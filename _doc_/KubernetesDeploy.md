@@ -65,40 +65,40 @@ In Kubernetes, users can define the desired state of their containerized applica
 - Deployment example: Configuration can be changed while running the cluster and update the application by applying the deployment config.
     ```
     apiVersion: apps/v1
-    kind: Deployment *type of component is beeing created* 
+    kind: Deployment #type of component is beeing created
     metadata:
-        name: appname-deployment *name of deployment*
+        name: appname-deployment #name of deployment
         labels:
-            app: appname *label used by service selector to connect service to deployment*
+            app: appname #label used by service selector to connect service to deployment
     spec: *spec for deployment*
-        replicas: 2 *number of replicas of the instance*
+        replicas: 2 #number of replicas of the instance
         selector:
             matchLabels:
-                app: appname *deployment is told to match the template labels named appname*
-        template: *the blueprint for the POD*
+                app: appname #deployment is told to match the template labels named appname
+        template: #the blueprint for the POD
             metadata:
                 labels:
                     app: appname
-            spec: *spec for the POD*
+            spec: #spec for the POD
                 containers:
                 -   name: appname
-                    image: appname:latest *name of image to use in the POD*
+                    image: appname:latest #name of image to use in the POD
                     ports:
-                    -   containerPort: 80 *port binded by POD*
+                    -   containerPort: 80 #port binded by POD
     ```
 - Service example:
     ```
     apiVersion: v1
-    kind: Service *type of component is beeing created* 
+    kind: Service #type of component is beeing created 
     metadata:
-        name: appname-service *name of deployment*
-    spec: *spec for service*
+        name: appname-service #name of deployment
+    spec: #spec for service
         selector:
             app: appname
         ports:
             -   protocol: TCP
                 port: 80
-                targetPort: 8080 *should match containerPort*
+                targetPort: 8080 #should match containerPort
     ```
 
 
@@ -107,5 +107,5 @@ In Kubernetes, users can define the desired state of their containerized applica
 | --- | --- |
 | `kubectl apply -f yamlFiles` | Create resources from list of `yaml` files |
 | `kubectl describe svc api-gateway` | Look for IP of a service |
-| `kubectl get nodes|pods|services|deployments` | Get status of nodes, pods, services or deployments running |
-| `kubectl create|edit|delete deployment deplName` | CRUD of deployments |
+| `kubectl get nodes/pods/services/deployments` | Get status of nodes, pods, services or deployments running |
+| `kubectl create/edit/delete deployment deplName` | CRUD of deployments |
