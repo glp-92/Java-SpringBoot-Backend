@@ -40,21 +40,13 @@ In Kubernetes, users define the desired state of their containerized application
         ```
         docker run --rm -it -v ${PWD}:/opt kompose sh -c "cd /opt && kompose convert"
         ```
+    - In this case, some config attributes should change, so it is preferred to make custom .yaml config files, as the located on root folder of this repo.
 3. To create and run the Kubernetes resources specifying `yaml` files:
     ```
-    kubectl apply -f api-gateway-deployment.yaml,api-gateway-service.yaml,auth-service-deployment.yaml,discovery-service-deployment.yaml,discovery-service-service.yaml,opt-default-networkpolicy.yaml,store-service-deployment.yaml
+    kubectl apply -f api-gateway.yaml,auth-server.yaml,discovery-server.yaml,store-server.yaml
     ```
     :heavy_exclamation_mark: It is important to not have spaces or additional commas between file specification.
 4. To **stop cluster** and delete associated containers, on `Docker Desktop`, go to `settings -> kubernetes -> reset kubernetes cluster`
-
-## Troubleshooting
-- Forward a service running on Kubernetes:
-    1. Get POD name `kubectl get pods' 
-    2. Forward port `kubectl port-forward podName port:port`
-- Eureka clients must modify eureka IP in order to be discovered. To make this:
-    ```
-    kubectl get pods
-    ```
 
 ## About yaml configurations
 - Parts of config files:
@@ -62,45 +54,51 @@ In Kubernetes, users define the desired state of their containerized application
     2. Spec: configuration to apply to the component.
     3. Status: managed by Kubernetes.
 
-- Deployment example: Configuration can be changed while running the cluster and update the application by applying the deployment config.
+- Deployment example of `discovery-server`: Configuration can be changed while running the cluster and update the application by applying the deployment config.
     ```
     apiVersion: apps/v1
-    kind: Deployment #type of component is beeing created
+    kind: Deployment
     metadata:
-        name: appname-deployment #name of deployment
+    name: discovery-server
+    labels:
+        app: discovery-server
+    spec:
+    replicas: 2
+    selector:
+        matchLabels:
+        app: discovery-server #match with specified template label app
+    template:
+        metadata:
         labels:
-            app: appname #label used by service selector to connect service to deployment
-    spec: *spec for deployment*
-        replicas: 2 #number of replicas of the instance
-        selector:
-            matchLabels:
-                app: appname #deployment is told to match the template labels named appname
-        template: #the blueprint for the POD
-            metadata:
-                labels:
-                    app: appname
-            spec: #spec for the POD
-                containers:
-                -   name: appname
-                    image: appname:latest #name of image to use in the POD
-                    ports:
-                    -   containerPort: 80 #port binded by POD
+            app: discovery-server
+        spec:
+        containers:
+        - name: discovery-server 
+            image: guill392/discovery-service:latest #image on docker hub or local
+            ports:
+            - containerPort: 8761 #port exposed but container, NOT outside cluster network
     ```
 - Service example:
     ```
     apiVersion: v1
-    kind: Service #type of component is beeing created 
+    kind: Service
     metadata:
-        name: appname-service #name of deployment
-    spec: #spec for service
+        name: discovery-server-service
+    spec:
+        type: NodePort #Nodeport exposes port to outside of the cluster network
         selector:
-            app: appname
+            app: discovery-server #refering deployment name specified on deployment kind config
         ports:
-            -   protocol: TCP
-                port: 80
-                targetPort: 8080 #should match containerPort
+            - protocol: TCP
+            port: 8761
+            targetPort: 8761
+            nodePort: 31000 #port exposed outside, kubernetes forces >30000
     ```
 
+## Troubleshooting
+- Forward a service running on Kubernetes:
+    1. Get POD name `kubectl get pods` 
+    2. Forward port of POD `kubectl port-forward podName port:port`
 
 ## Useful Kubectl commands
 | Command | Usage | 
