@@ -54,7 +54,7 @@ In Kubernetes, users define the desired state of their containerized application
     2. Spec: configuration to apply to the component.
     3. Status: managed by Kubernetes.
 
-- Deployment and Service example of `discovery-server`: Configuration can be changed while running the cluster and update the application by applying the deployment config.
+- Deployment example of `discovery-server`: Configuration can be changed while running the cluster and update the application by applying the deployment config.
     ```
     apiVersion: apps/v1
     kind: Deployment
