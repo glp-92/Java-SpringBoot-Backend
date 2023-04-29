@@ -40,7 +40,7 @@ In Kubernetes, users define the desired state of their containerized application
         ```
         docker run --rm -it -v ${PWD}:/opt kompose sh -c "cd /opt && kompose convert"
         ```
-    - In this case, some config attributes should change, so it is preferred to make custom .yaml config files, as the located on root folder of this repo.
+    - In this case, some config attributes should change, so it is preferred to make custom `yaml`  config files, as the located on root folder of this repo.
 3. To create and run the Kubernetes resources specifying `yaml` files:
     ```
     kubectl apply -f api-gateway.yaml,auth-server.yaml,discovery-server.yaml,store-server.yaml
@@ -66,7 +66,7 @@ In Kubernetes, users define the desired state of their containerized application
     replicas: 2
     selector:
         matchLabels:
-        app: discovery-server #match with specified template label app
+        app: discovery-server #match with specified template (labels:app:...)
     template:
         metadata:
         labels:
@@ -78,7 +78,7 @@ In Kubernetes, users define the desired state of their containerized application
             ports:
             - containerPort: 8761 #port exposed but container, NOT outside cluster network
     ```
-- Service example:
+- Service example, in this one, port 31000 of cluster is beeing exposed using NodePort.
     ```
     apiVersion: v1
     kind: Service
@@ -87,11 +87,11 @@ In Kubernetes, users define the desired state of their containerized application
     spec:
         type: NodePort #Nodeport exposes port to outside of the cluster network
         selector:
-            app: discovery-server #refering deployment name specified on deployment kind config
+            app: discovery-server #refering deployment name specified on deployment kind config (labels:app:...)
         ports:
             - protocol: TCP
-            port: 8761
-            targetPort: 8761
+            port: 8761 #port by the service to connect other services or pods
+            targetPort: 8761 #port forwarded to the POD, must match containerPort on deployment
             nodePort: 31000 #port exposed outside, kubernetes forces >30000
     ```
 

@@ -1,27 +1,27 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: auth-server
+  name: store-server
   labels:
-    app: auth-server 
+    app: store-server 
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: auth-server
+      app: store-server
   template:
     metadata:
       labels:
-        app: auth-server
+        app: store-server
     spec:
       containers:
-        - name: auth-server
-          image: guill392/auth-service:latest
+        - name: store-server
+          image: guill392/store-service:latest
           env:
             - name: EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE
               value: http://discovery-server-service:8761/eureka
             - name: SPRING_APPLICATION_NAME
-              value: AUTH-SERVER
+              value: STORE-SERVICE
           ports:
-            - containerPort: 8080
+            - containerPort: 7000
       restartPolicy: Always
