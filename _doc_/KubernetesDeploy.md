@@ -1,9 +1,16 @@
 # Deploy Backend to Kubernetes
 
+## Fast Desployment on Windows locally
+1. `yaml` files are generated on the root repository folder. Init `Docker Destop` and enable `Kubernetes` on settings.
+2. `kubectl apply -f discovery-server.yaml,api-gateway.yaml,auth-server.yaml,store-server.yaml` to create deployments and services.
+3. `NodePort` param is configured to `Discovery-server` and `Api-Gateway` so users can access to test Eureka Dashboard and API endpoints.
+    - `Discovery-server` localhost:31000
+    - `Api-Gateway` localhost:32000
+
 ## Kubernetes overview
 Kubernetes is a tool that helps to manage and deploy containerized applications (such as Docker containers) across a cluster of computers or virtualized environments. It takes care of things like load balancing, scaling, and failover.
 
-In Kubernetes, users define the desired state of their containerized applications by using a configuration file, and Kubernetes will automatically ensure that the applications are running as expected.
+In Kubernetes, users define desired state of their containerized applications by using a configuration file, and Kubernetes will automatically ensure that the applications are running as expected.
 
 **Main components of Kubernetes:**
 1. Pod: smallest unit, usually has one container into it (contains an app). Each POD has an internal IP address. When a POD is replaced, new IP is assigned.
