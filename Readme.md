@@ -38,7 +38,7 @@ By using the API Gateway URI: `http://localhost:9000`
 [Deploy containerized backend on Kubernetes cluster](_doc_/KubernetesDeploy.md)
 
 ## AWS Deploy
-[Deploy Docker containers on EC2 instance](_doc_/AWSDeploy.md)
+[Deploy Docker containers on EC2 instance](_doc_/AWSDockerDeploy.md)
 
 ## Future Improvements:
 - All
